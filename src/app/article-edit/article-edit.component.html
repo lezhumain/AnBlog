@@ -1,0 +1,58 @@
+<!--<div *ngIf="!newArticle">-->
+    <!--Loading...-->
+<!--</div>-->
+<!--<form #articleForm="ngForm" *ngIf="newArticle">-->
+    <!--<input required type="text" placeholder="Titre" [(ngModel)]="newArticle.titre" name="titre">-->
+
+    <!--<select (change)="setNewCategorie($event.target.value)">-->
+        <!--<option value="0">Categorie</option>-->
+        <!--<option *ngFor="let categorie of categories" value="{{categorie.id}}">-->
+            <!--{{categorie.name}}-->
+        <!--</option>-->
+    <!--</select>-->
+
+
+    <!--<textarea required class="articleArea" [(ngModel)]="newArticle.content" name="content"></textarea>-->
+    <!--<br>-->
+    <!--&lt;!&ndash;TODO&ndash;&gt;-->
+    <!--&lt;!&ndash;<app-text-editor [text]="newArticle.content"></app-text-editor>&ndash;&gt;-->
+    <!--&lt;!&ndash;TODO&ndash;&gt;-->
+    <!--<button type="button" (click)="addArticle()">Comment</button>-->
+    <!--<button type="button" (click)="cancelArticle()">Cancel</button>-->
+<!--</form>-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <form #articleForm="ngForm">
+                <div class="form-group">
+                    <label for="titre">Title</label>
+                    <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre"
+                           required
+                           [(ngModel)]="newArticle.titre">
+                </div>
+                <div class="form-group">
+                    <label for="soustitre">Sous-Title</label>
+                    <input type="text" class="form-control" id="soustitre" name="soustitre" placeholder="Sous-Titre"
+                           [(ngModel)]="newArticle.soustitre">
+                </div>
+                <div class="form-group">
+                    <label for="categorieId">Catetgorie</label>
+                    <select class="form-control" id="categorieId" name="categorieId" [(ngModel)]="newArticle.categorieId">
+                        <option value="{{ca.id}}" *ngFor="let ca of categ | async">{{ca.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="content">Article</label>
+                    <textarea class="form-control" id="content" name="content" rows="3"
+                              required
+                              [(ngModel)]="newArticle.content"></textarea>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-success" (click)="addArticle()">Submit</button>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

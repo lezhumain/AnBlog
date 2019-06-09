@@ -1,0 +1,9 @@
+<div *ngIf="!comment">
+    Loading
+</div>
+<div class="comment-list" *ngIf="comment">
+    <p>
+        Commmente le <span>{{comment.createdAt}}</span> par <span>{{comment.writer}}</span>
+    </p>
+    <p>{{comment.content}}</p>
+</div>

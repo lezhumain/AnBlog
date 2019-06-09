@@ -1,0 +1,16 @@
+.type-indicator {
+    position: relative;
+    min-width: 15px;
+    height: auto;
+    /*background-color: blue;*/
+    float: right;
+    color: white;
+    padding: 2px 4px;
+    font-size: 12px;
+    padding: 5px 10px;
+    font-family: Helvetica Arial;
+}
+
+.post-title {
+    cursor: pointer;
+}

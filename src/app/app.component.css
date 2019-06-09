@@ -1,0 +1,15 @@
+section {
+    width: 700px;
+    padding: 15px;
+    margin: 15px;
+}
+
+section article, section aside {
+    display: inline-block;
+    margin: 15px;
+    vertical-align: top;
+}
+
+section aside{
+    max-width: 360px;
+}

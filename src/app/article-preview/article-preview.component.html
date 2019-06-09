@@ -1,0 +1,14 @@
+<div class="post-preview">
+    <a [attr.href]="TODOZ">
+        <div class="type-indicator" [style.backgroundColor]="article.categorie?.cssColor">{{article.categorie?.name}}</div>
+        <h2 class="post-title">
+            {{article.titre}}
+        </h2>
+        <h3 class="post-subtitle" *ngIf="article.soustitre">
+            {{article.soustitre}}
+        </h3>
+    </a>
+    <p class="post-meta">Posted by
+        <a href="#">{{article.writer}}</a>
+        on {{article.createdAt}}</p>
+</div>

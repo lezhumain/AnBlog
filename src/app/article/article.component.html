@@ -1,0 +1,29 @@
+<div *ngIf="!article">
+    Loading...
+</div>
+<article class="article" *ngIf="article">
+    <header>
+        <h3 class="article-title">{{article.titre}}</h3>
+        <!--<div class="type-indicator {{getCssTypeClassFromId(article.categorieId)}}"></div>-->
+        <div class="type-indicator" [style.backgroundColor]="article.categorie?.cssColor">{{article.categorie?.name}}</div>
+    </header>
+    <hr>
+    <div>
+        <p>
+            Ecrit le <span>{{article.createdAt}}</span> par <span>{{article.writer}}</span>
+        </p>
+        <p>{{article.content}}</p>
+    </div>
+    <footer>
+        <p>??? Ecrit le <span>{{article.createdAt}}</span> par <span>{{article.writer}}</span> ???</p>
+        <div class="comment">
+            <p>Comments:</p>
+            <app-comment-edit (newCommentEvent)="addComment($event)"></app-comment-edit>
+        </div>
+        <div class="comment-list">
+            <ng-container *ngFor="let c of article.comments">
+                <app-comment [comment]="c"></app-comment>
+            </ng-container>
+        </div>
+    </footer>
+</article>
