@@ -30,6 +30,8 @@ export class NavbarComponent implements OnInit {
 
     filterBy(name: string) {
         this.navService.currentCateg.next(name);
-        return false;
+        if(name !== null) {
+            return false;
+        }
     }
 }

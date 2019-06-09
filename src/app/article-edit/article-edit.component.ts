@@ -22,7 +22,8 @@ export class ArticleEditComponent implements OnInit {
     newArticle: Article;
     // categories: Categorie[] = [];
     private alive = true;
-    private categ: Observable<Categorie[]>;
+
+    categ: Observable<Categorie[]>;
 
     constructor(private articleService: ArticleService,
                 private categorieService: CategorieService,
@@ -43,7 +44,6 @@ export class ArticleEditComponent implements OnInit {
             return;
         }
 
-        debugger;
         const clone: Article = JsonUtils.cloneObj(this.newArticle) as Article;
         clone.createdAt = JsonUtils.formatDate(new Date());
 
@@ -63,5 +63,9 @@ export class ArticleEditComponent implements OnInit {
 
     setNewCategorie(categorieId: number) {
         this.newArticle.categorieId = categorieId;
+    }
+
+    cancel() {
+        this.router.navigate(['/']);
     }
 }

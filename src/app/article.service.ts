@@ -1,26 +1,36 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
 import {Article, Categorie} from './model/model';
-import {map} from 'rxjs/operators';
+import {debounceTime, map} from 'rxjs/operators';
 import {CategorieService} from './categorie.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ArticleService {
+    private readonly storageKey = "appArticles";
+
     private _articles: BehaviorSubject<Article[]> = new BehaviorSubject([]);
 
     // private articles: BehaviorSubject<Article> = new BehaviorSubject([]);
 
     constructor(private categorieService: CategorieService) {
-        this._articles.next([
-            {id: 0, titre: 'Article1', content: 'content1', createdAt: '2019-06-01T11:44:40.529Z',
-                categorieId: 1, writer: "Cams"} as Article,
-            {id: 1, titre: 'Article2', content: 'content2', createdAt: '2019-06-01T11:54:40.529Z',
-                categorieId: 1, writer: "Dju"} as Article,
-            {id: 2, titre: 'Article3', content: 'content3', createdAt: '2019-06-02T11:44:40.529Z',
-                categorieId: 2, writer: "Cams"} as Article
-        ]);
+        let articles = JSON.parse(window.localStorage.getItem(this.storageKey)) as Article[];
+        if(!articles) {
+            articles = [
+                {id: 0, titre: 'Article1', content: 'content1', createdAt: '2019-06-01T11:44:40.529Z',
+                    categorieId: 1, writer: "Cams"} as Article,
+                {id: 1, titre: 'Article2', content: 'content2', createdAt: '2019-06-01T11:54:40.529Z',
+                    categorieId: 1, writer: "Dju"} as Article,
+                {id: 2, titre: 'Article3', content: 'content3', createdAt: '2019-06-02T11:44:40.529Z',
+                    categorieId: 2, writer: "Cams"} as Article
+            ];
+        }
+        this._articles.next(articles);
+
+        this._articles.pipe(debounceTime(500)).subscribe( (a) => {
+            window.localStorage.setItem(this.storageKey, JSON.stringify(a));
+        });
     }
 
     getArticles(): Observable<Article[]> {
@@ -54,6 +64,15 @@ export class ArticleService {
     }
 
     createArticle(article: Article) {
+        const lastId = this._articles.getValue().reduce( (res, item) => {
+            if(item.id > res) {
+                res = item.id;
+            }
+            return res;
+        }, 0);
+        if(!article.id) {
+            article.id = lastId + 1;
+        }
         const all: Article[] = this._articles.getValue();
         all.push(article);
 
