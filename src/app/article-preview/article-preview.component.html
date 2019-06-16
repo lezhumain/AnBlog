@@ -1,14 +1,19 @@
-<div class="post-preview">
-    <a routerLink="/post/{{article.id}}">
-        <div class="type-indicator" [style.backgroundColor]="article.categorie?.cssColor">{{article.categorie?.name}}</div>
-        <h2 class="post-title">
-            {{article.titre}}
-        </h2>
-        <h3 class="post-subtitle" *ngIf="article.soustitre">
-            {{article.soustitre}}
-        </h3>
-    </a>
-    <p class="post-meta">Posted by
-        <a href="#">{{article.writer}}</a>
-        on {{article.createdAt}}</p>
+<div class="row post-preview">
+    <div class="col-4">
+        <img class="article-img" src="{{article?.img}}">
+    </div>
+    <div class="col-8">
+        <a routerLink="/post/{{article.id}}">
+            <div class="type-indicator" [style.backgroundColor]="article.categorie?.cssColor">{{article.categorie?.name}}</div>
+            <h2 class="post-title">
+                {{article.titre}}
+            </h2>
+            <h3 class="post-subtitle" *ngIf="article.soustitre">
+                {{article.soustitre}}
+            </h3>
+        </a>
+        <p class="post-meta">Posted by
+            <a href="#">{{article.writer}}</a>
+            on {{article.createdAt}}</p>
+    </div>
 </div>

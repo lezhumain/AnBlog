@@ -40,26 +40,26 @@
 <app-navbar></app-navbar>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('../assets/startbootstrap-clean-blog-gh-pages/img/home-bg.jpg')" *ngIf="headerData">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading" *ngIf="!headerData.writer">
-                    <h1>{{headerData.title}}</h1>
-                    <span class="subheading">{{headerData.soustitre}}</span>
-                </div>
-                <div class="post-heading" *ngIf="headerData.writer">
-                    <h1>{{headerData.title}}</h1>
-                    <h2 class="subheading">{{headerData.soustitre}}</h2>
-                    <span class="meta">Posted by
-                          <a href="#">{{headerData.writer}}</a>
-                          on {{headerData.createdAt}}
-                        </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<!--<header class="masthead" style="background-image: url('assets/startbootstrap-clean-blog-gh-pages/img/home-bg.jpg')" *ngIf="headerData">-->
+    <!--<div class="overlay"></div>-->
+    <!--<div class="container">-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-8 col-md-10 mx-auto">-->
+                <!--<div class="site-heading" *ngIf="!headerData.writer">-->
+                    <!--<h1>{{headerData.title}}</h1>-->
+                    <!--<span class="subheading">{{headerData.soustitre}}</span>-->
+                <!--</div>-->
+                <!--<div class="post-heading" *ngIf="headerData.writer">-->
+                    <!--<h1>{{headerData.title}}</h1>-->
+                    <!--<h2 class="subheading">{{headerData.soustitre}}</h2>-->
+                    <!--<span class="meta">Posted by-->
+                          <!--<a href="#">{{headerData.writer}}</a>-->
+                          <!--on {{headerData.createdAt}}-->
+                        <!--</span>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</header>-->
 
 <router-outlet></router-outlet>

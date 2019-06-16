@@ -7,6 +7,7 @@ import {CommentService} from '../comment.service';
 import {CategorieService} from '../categorie.service';
 import {NavbarService} from '../navbar.service';
 import {Router} from '@angular/router';
+import {ICarouselItem} from '../carousel/carousel.component';
 
 @Component({
     selector: 'app-article-list',
@@ -20,6 +21,7 @@ export class ArticleListComponent implements OnInit, OnDestroy {
     private alive = true;
 
     private _articles: Article[] = [];
+    carouselItems: ICarouselItem[];
     get articles(): Article[] {
         return this._articles;
     }
@@ -46,6 +48,8 @@ export class ArticleListComponent implements OnInit, OnDestroy {
                 article.selected = true;
                 return article;
             });
+
+            this.setCarousel(articles);
         });
 
         this.navService.currentCateg.pipe(takeWhile( () => this.alive ))
@@ -63,5 +67,17 @@ export class ArticleListComponent implements OnInit, OnDestroy {
 
     goToNewArticle() {
         this.router.navigate(['/new']);
+    }
+
+    private setCarousel(articles: Article[]) {
+        this.carouselItems = this.articles.filter( a => !!a.img ).map( (a: Article, index: number) => {
+            return {
+                img: a.img,
+                title: a.titre,
+                subTitle: a.soustitre,
+                alt: `Item no${index}`,
+                active: index === 0
+            };
+        });
     }
 }

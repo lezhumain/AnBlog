@@ -1,0 +1,9 @@
+#mainNav a,
+#mainNav .navbar-nav>li.nav-item>a,
+#mainNav>li.nav-item>a:focus, #mainNav .navbar-nav>li.nav-item>a:hover{
+    color: black;
+}
+
+#mainNav {
+    position: relative;
+}

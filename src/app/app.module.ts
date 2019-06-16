@@ -13,6 +13,7 @@ import { ArticlePreviewComponent } from './article-preview/article-preview.compo
 import { NavbarComponent } from './navbar/navbar.component';
 import {RouterModule, Routes} from '@angular/router';
 import { ArticleListComponent } from './article-list/article-list.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 // const appRoutes: Routes = [
 //     { path: 'crisis-center', component: CrisisListComponent },
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     HomeComponent,
     ArticlePreviewComponent,
     NavbarComponent,
-    ArticleListComponent
+    ArticleListComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,

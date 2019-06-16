@@ -14,3 +14,7 @@
 .post-title {
     cursor: pointer;
 }
+
+.article-img {
+    width: 100%;
+}

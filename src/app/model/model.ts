@@ -17,6 +17,7 @@ export class Article implements IWrittenThing {
     categorie: Categorie;
     comments: Comment[];
     selected: boolean;
+    img: string;
 }
 
 export class Categorie {
