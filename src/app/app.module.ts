@@ -14,6 +14,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {RouterModule, Routes} from '@angular/router';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import {FroalaEditorModule, FroalaViewModule} from 'angular-froala-wysiwyg';
+import { TextEditor2Component } from './text-editor2/text-editor2.component';
+import {CKEditorModule} from 'ckeditor4-angular';
+import { EscapeHtmlPipe } from './keep-html.pipe';
+import {HttpClientModule} from '@angular/common/http';
+import { GeoIpComponent } from './geo-ip/geo-ip.component';
 
 // const appRoutes: Routes = [
 //     { path: 'crisis-center', component: CrisisListComponent },
@@ -48,12 +54,18 @@ const appRoutes: Routes = [
     ArticlePreviewComponent,
     NavbarComponent,
     ArticleListComponent,
-    CarouselComponent
+    CarouselComponent,
+    TextEditor2Component,
+      EscapeHtmlPipe,
+      GeoIpComponent
   ],
   imports: [
     BrowserModule,
       FormsModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
+      CKEditorModule,
+      HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

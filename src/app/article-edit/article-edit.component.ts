@@ -7,6 +7,7 @@ import {take, takeWhile} from 'rxjs/operators';
 import {CategorieService} from '../categorie.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {HeaderData, HeaderService} from '../header.service';
 
 @Component({
     selector: 'app-article-edit',
@@ -27,12 +28,19 @@ export class ArticleEditComponent implements OnInit {
 
     constructor(private articleService: ArticleService,
                 private categorieService: CategorieService,
-                private router: Router) { }
+                private router: Router,
+                private headerService: HeaderService) { }
 
     ngOnInit() {
         this.newArticle = new  Article();
+        this.newArticle.content = 'test';
 
         this.categ =  this.categorieService.getCategories().pipe(takeWhile(() => this.alive));
+
+        this.headerService.headerData.next({
+            title: "Cams Blog",
+            soustitre: "A Blog Theme by Start Bootstrap"
+        } as HeaderData);
     }
 
     ngOnDestroy() {
@@ -40,6 +48,7 @@ export class ArticleEditComponent implements OnInit {
     }
 
     addArticle() {
+        debugger;
         if (this.articleForm.form.valid === false) {
             return;
         }

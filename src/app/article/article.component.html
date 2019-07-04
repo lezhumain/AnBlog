@@ -27,8 +27,8 @@
     <article>
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    {{article.content}}
+                <div class="col-lg-8 col-md-10 mx-auto"
+                    [innerHTML]="article.content | keepHtml">
                 </div>
             </div>
         </div>

@@ -1,44 +1,57 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import * as $ from 'jquery';
-import {fromEvent} from 'rxjs';
-import {first, take} from 'rxjs/operators';
-// import * as _ from '../../assets/jQuery-TE_v.1.4.0/jquery-te-1.4.0.min.js';
+// Import Froala Editor.
+import FroalaEditor from 'froala-editor';
 
+// We will make usage of the Init hook and make the implementation there.
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 @Component({
     selector: 'app-text-editor',
     templateUrl: './text-editor.component.html',
-    styleUrls: ['./text-editor.component.css', '../../assets/jQuery-TE_v.1.4.0/jquery-te-1.4.0.css'],
+    styleUrls: ['./text-editor.component.css'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TextEditorComponent),
+            multi: true
+        }
+    ]
 })
-export class TextEditorComponent implements OnInit, AfterViewInit {
-    static libLoaded = false;
+export class TextEditorComponent implements OnInit, ControlValueAccessor {
 
-    @Input() text: string;
-    @ViewChild("areaElement", {static: false}) areaElement: ElementRef<HTMLTextAreaElement>;
-    @ViewChild("libElem", {static: false}) libElem: ElementRef<HTMLScriptElement>;
+    options = {
+        charCounterCount: true,
+        toolbarButtons: [['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'],
+            ['fontFamily', 'fontSize', 'textColor', 'backgroundColor'],
+            ['inlineClass', 'inlineStyle', 'clearFormatting']]
+    };
 
-    get libLoaded(): boolean {
-        return TextEditorComponent.libLoaded;
+    private _text: string;
+    set text(value: string) {
+        this._text = value;
+        this.propagateChange(this._text);
     }
-    set libLoaded(value: boolean) {
-        TextEditorComponent.libLoaded = TextEditorComponent.libLoaded === false ? value : true;
-    }
-
-    constructor() { }
+    get text(): string {
+        return this._text;
+    };
 
     ngOnInit() {
     }
 
-    ngAfterViewInit() {
-        if (this.libElem) {
-            fromEvent(this.libElem.nativeElement, 'load').pipe(take(1)).subscribe(() => {
-                const elem = $(this.areaElement.nativeElement);
-                console.log(elem);
-                elem.jqte();
-            });
-        }
+    propagateChange = (obj: any) => {};
+
+    registerOnChange(fn) {
+        this.propagateChange = fn;
     }
 
-    setLibLoaded() {
-        this.libLoaded = true;
+    registerOnTouched(fn: any): void {
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+    }
+
+    writeValue(obj: string): void {
+        if (obj !== undefined) {
+            this.text = obj;
+        }
     }
 }

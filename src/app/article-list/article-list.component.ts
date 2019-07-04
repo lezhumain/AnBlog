@@ -8,6 +8,7 @@ import {CategorieService} from '../categorie.service';
 import {NavbarService} from '../navbar.service';
 import {Router} from '@angular/router';
 import {ICarouselItem} from '../carousel/carousel.component';
+import {HeaderData, HeaderService} from '../header.service';
 
 @Component({
     selector: 'app-article-list',
@@ -17,6 +18,7 @@ import {ICarouselItem} from '../carousel/carousel.component';
 export class ArticleListComponent implements OnInit, OnDestroy {
 
     isAdmin = true;
+    headerData: HeaderData = null;
 
     private alive = true;
 
@@ -36,9 +38,12 @@ export class ArticleListComponent implements OnInit, OnDestroy {
                 private commentService: CommentService,
                 private categorieService: CategorieService,
                 private navService: NavbarService,
-                private router: Router) { }
+                private router: Router,
+                private headerService: HeaderService) { }
 
     ngOnInit() {
+        this.headerService.headerData.next(this.headerData);
+
         combineLatest(
             this.commentService.getComments(),
             this.articleService.getArticles()

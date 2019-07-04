@@ -5,6 +5,7 @@ import {debounceTime, map} from 'rxjs/operators';
 import {CategorieService} from './categorie.service';
 
 import {default as data_json} from './articles.json';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -17,8 +18,8 @@ export class ArticleService {
     // private articles: BehaviorSubject<Article> = new BehaviorSubject([]);
 
     constructor(private categorieService: CategorieService) {
-        // let articles = JSON.parse(window.localStorage.getItem(this.storageKey)) as Article[];
-        let articles = null;
+        let articles = JSON.parse(window.localStorage.getItem(this.storageKey)) as Article[];
+        // let articles = null;
         if(!articles) {
             // articles = [
             //     {id: 0, titre: 'Article1', content: 'content1', createdAt: '2019-06-01T11:44:40.529Z',

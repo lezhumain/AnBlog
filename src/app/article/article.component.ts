@@ -36,9 +36,10 @@ export class ArticleComponent implements OnInit {
                     createdAt: article.createdAt,
                     soustitre: article.soustitre,
                     title: article.titre,
-                    writer: article.writer
+                    writer: article.writer,
+                    img: article.img
                 };
-                debugger;
+                // debugger;
                 this.headerService.headerData.next(headerData);
             }
         });

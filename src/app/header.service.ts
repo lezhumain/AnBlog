@@ -6,6 +6,7 @@ export interface HeaderData {
     soustitre: string;
     writer?: string;
     createdAt?: string;
+    img: string;
 }
 
 @Injectable({

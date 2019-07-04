@@ -1,0 +1,12 @@
+.second-toolbar {
+    border: 1px solid #CCCCCC;
+    border-top: 0;
+    background: #FFF;
+    line-height: 1.4;
+    border-radius: 0 0 10px 10px;
+    -moz-border-radius: 0 0 10px 10px;
+    -webkit-border-radius: 0 0 10px 10px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}

@@ -37,10 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     constructor(private categorieService: CategorieService, private headerService: HeaderService,
                 private cdr: ChangeDetectorRef) {
-        this.headerService.headerData.next({
-            title: "Cams Blog",
-            soustitre: "A Blog Theme by Start Bootstrap"
-        } as HeaderData);
     }
 
     ngOnInit() {
