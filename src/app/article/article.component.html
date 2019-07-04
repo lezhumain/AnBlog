@@ -1,40 +1,38 @@
-<div *ngIf="!article">
-    Loading...
-</div>
+<ng-template #loading>
+    <div>
+        Loading...
+    </div>
+</ng-template>
 
-<ng-container *ngIf="article"><!-- Page Header -->
-    <!--TODO header service-->
-    <!--<header class="masthead" style="background-image: url('../../assets/startbootstrap-clean-blog-gh-pages/img/post-bg.jpg')"-->
-            <!--*ngIf="headerData">-->
-        <!--<div class="overlay"></div>-->
-        <!--<div class="container">-->
-            <!--<div class="row">-->
-                <!--<div class="col-lg-8 col-md-10 mx-auto">-->
-                    <!--<div class="post-heading">-->
-                        <!--<h1>{{headerData.title}}</h1>-->
-                        <!--<h2 class="subheading">{{headerData.soustitre}}</h2>-->
-                        <!--<span class="meta">Posted by-->
-                          <!--<a href="#">{{headerData.writer}}</a>-->
-                          <!--on {{headerData.createdAt}}-->
-                        <!--</span>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</header>-->
-
+<ng-container *ngIf="article$ | async; let article; else loading"><!-- Page Header -->
     <!-- Post Content -->
     <article>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto"
-                    [innerHTML]="article.content | keepHtml">
+                    [innerHTML]="articleContent$ |  async | keepHtml">
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <app-comment-edit (newCommentEvent)="addComment($event)"></app-comment-edit>
+                </div>
+            </div>
+
+            <div class="comments">
+                <div class="row" *ngFor="let comment of article.comments">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <app-comment [comment]="comment"></app-comment>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </article>
 
     <hr>
+
 </ng-container>
 
 

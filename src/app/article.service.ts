@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
-import {Article, Categorie} from './model/model';
+import {Article, Categorie, Comment} from './model/model';
 import {debounceTime, map} from 'rxjs/operators';
 import {CategorieService} from './categorie.service';
 
 import {default as data_json} from './articles.json';
 import {HttpClient} from '@angular/common/http';
+import {CommentService} from './comment.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +18,7 @@ export class ArticleService {
 
     // private articles: BehaviorSubject<Article> = new BehaviorSubject([]);
 
-    constructor(private categorieService: CategorieService) {
+    constructor(private categorieService: CategorieService, private commentService: CommentService) {
         let articles = JSON.parse(window.localStorage.getItem(this.storageKey)) as Article[];
         // let articles = null;
         if(!articles) {
@@ -87,4 +88,13 @@ export class ArticleService {
     updateArticle(article: Article) {}
 
     deleteArticle(articleId: number) {}
+
+    addComment(c: Comment, articleId: number) {
+        this._articles.next(this._articles.getValue().map( (a: Article) => {
+            if(a.id === articleId) {
+                a.comments.push(c);
+            }
+            return a;
+        }));
+    }
 }
