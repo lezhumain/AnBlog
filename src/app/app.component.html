@@ -40,7 +40,8 @@
 <app-navbar></app-navbar>
 
 <!-- Page Header -->
-<header class="masthead" [style.backgroundImage]="'url(' + headerData.img + ')'" *ngIf="headerData">
+<header class="masthead" [style.backgroundImage]="headerData.img ? 'url(' + headerData.img + ')' : ''"
+        *ngIf="headerData">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">

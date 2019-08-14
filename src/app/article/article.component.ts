@@ -1,11 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Article, Comment} from '../model/model';
-import {JsonUtils} from '../utils/tsutils';
 import {ActivatedRoute} from '@angular/router';
 import {ArticleService} from '../article.service';
-import {catchError, debounceTime, distinctUntilChanged, filter, first, map, startWith, subscribeOn, takeWhile} from 'rxjs/operators';
-import {HeaderData, HeaderService} from '../header.service';
-import {CategorieService} from '../categorie.service';
+import {catchError, debounceTime, distinctUntilChanged, filter, map, startWith, takeWhile} from 'rxjs/operators';
+import {HeaderService} from '../header.service';
 import {CommentService} from '../comment.service';
 import {Observable, of} from 'rxjs';
 
@@ -14,11 +12,10 @@ import {Observable, of} from 'rxjs';
     templateUrl: './article.component.html',
     styleUrls: ['./article.component.css']
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent implements OnInit, OnDestroy {
 
     // @Input() article: Article = null;
     article$: Observable<Article> = null;
-    headerData: HeaderData = null;
     alive = true;
 
     articleContent$: Observable<string>;

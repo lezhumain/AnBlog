@@ -1,9 +1,9 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {Article, Categorie, Comment} from '../model/model';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Article, Categorie} from '../model/model';
 import {JsonUtils} from '../utils/tsutils';
 import {NgForm} from '@angular/forms';
 import {ArticleService} from '../article.service';
-import {take, takeWhile} from 'rxjs/operators';
+import {takeWhile} from 'rxjs/operators';
 import {CategorieService} from '../categorie.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
@@ -14,7 +14,7 @@ import {HeaderData, HeaderService} from '../header.service';
     templateUrl: './article-edit.component.html',
     styleUrls: ['./article-edit.component.css']
 })
-export class ArticleEditComponent implements OnInit {
+export class ArticleEditComponent implements OnInit, OnDestroy {
 
     // @ts-ignore
     @ViewChild('articleForm') articleForm: NgForm;
