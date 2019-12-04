@@ -3,10 +3,10 @@ import {Article, Categorie} from '../model/model';
 import {JsonUtils} from '../utils/tsutils';
 import {NgForm} from '@angular/forms';
 import {ArticleService} from '../article.service';
-import {takeWhile} from 'rxjs/operators';
+import {first, map, startWith, takeWhile} from 'rxjs/operators';
 import {CategorieService} from '../categorie.service';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {combineLatest, Observable, Subject} from 'rxjs';
 import {HeaderData, HeaderService} from '../header.service';
 
 @Component({
@@ -25,6 +25,8 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
     private alive = true;
 
     categ: Observable<Categorie[]>;
+    newCategorie: string;
+    private newCategorie$: Subject<Categorie> = new Subject<Categorie>();
 
     constructor(private articleService: ArticleService,
                 private categorieService: CategorieService,
@@ -35,7 +37,26 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
         this.newArticle = new  Article();
         this.newArticle.content = 'test';
 
-        this.categ =  this.categorieService.getCategories().pipe(takeWhile(() => this.alive));
+        this.categ = combineLatest([
+            this.categorieService.getCategories(),
+            this.newCategorie$.pipe(startWith(null))
+        ]).pipe(
+            takeWhile(() => this.alive),
+            map(([categs, newC]: [Categorie[], Categorie]) => {
+                console.log('Categories loaded: %o', categs);
+                // if(newC) {
+                //     const existingIndex = categs.findIndex(c => c.id === newC.id);
+                //     if(existingIndex === -1) {
+                //         categs.push(newC);
+                //     }
+                //     else {
+                //         categs.splice(existingIndex, 1, newC);
+                //     }
+                // }
+
+                return categs;
+            })
+        );
 
         this.headerService.headerData.next({
             title: "Cams Blog",
@@ -76,5 +97,18 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
 
     cancel() {
         this.router.navigate(['/']);
+    }
+
+    addCategorie() {
+        if (!this.newCategorie) {
+            return;
+        }
+
+        this.categorieService.saveCategorie(this.newCategorie).pipe(
+            first()
+        ).subscribe((c: Categorie) => {
+            // this.newCategorie$.next(c);
+            this.newCategorie = '';
+        });
     }
 }
