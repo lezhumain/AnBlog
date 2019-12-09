@@ -1,12 +1,29 @@
-#banner {
-    /*background-color: orangered;*/
-    height: 200px;
-    width: 100%;
-    text-align: center;
-    padding: 40px 0;
+.mainContainer {
+    max-width: none;
+    margin: 10px 30px;
+    width: auto;
 }
 
-#banner span {
-    height: 50px;
-    font-size: 74px;
+
+aside {
+    width: 300px;
+    min-height: 500px;
+    background-color: lightseagreen;
+
+    /*position: absolute;*/
+    /*left: 30px;*/
+}
+
+.leftPanel {
+    background-color: lightseagreen;
+    /*left: 30px;*/
+    float: left;
+
+}
+
+.rightPanel {
+    background-color: lightgreen;
+    /*right: 30px;*/
+    float: right;
+
 }

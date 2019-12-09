@@ -1,5 +1,5 @@
 <form #commentForm="ngForm">
-    <textarea class="commentArea" [(ngModel)]="content" name="content"></textarea>
-    <button type="button" (click)="addComment()">Comment</button>
-    <button type="button" (click)="cancelComment()">Cancel</button>
+    <textarea [(ngModel)]="content" class="commentArea form-control" name="content"></textarea>
+    <button (click)="addComment()" class="btn btn-success" type="button">Comment</button>
+    <button (click)="cancelComment()" class="btn btn-danger" type="button">Cancel</button>
 </form>

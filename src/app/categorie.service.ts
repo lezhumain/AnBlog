@@ -3,24 +3,35 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Categorie} from './model/model';
 import {first, map} from 'rxjs/operators';
 
-@Injectable({
-    providedIn: 'root'
-})
-export class CategorieService {
-    private allCategories$: BehaviorSubject<Categorie[]> = new BehaviorSubject<Categorie[]>([]);
-
-    constructor() {
-        this.loadCategories();
-    }
-
-    loadCategories() {
-        const storedCategories = localStorage.getItem('categories');
+export class BaseService {
+    protected load<T>(key: string): Observable<T[]> {
+        const storedCategories = localStorage.getItem(key);
         if (!storedCategories) {
             return of([]);
         }
 
-        const categories = JSON.parse(storedCategories) as Categorie[];
-        this.allCategories$.next(categories || []);
+        const categories = JSON.parse(storedCategories) as T[];
+        return of(categories);
+    }
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class CategorieService extends BaseService {
+    private allCategories$: BehaviorSubject<Categorie[]> = new BehaviorSubject<Categorie[]>([]);
+
+    constructor() {
+        super();
+        this.loadCategories();
+    }
+
+    loadCategories() {
+        this.load<Categorie>('categories').pipe(
+            first()
+        ).subscribe((categories: Categorie[]) => {
+            this.allCategories$.next(categories || []);
+        });
     }
 
     getCategories(): Observable<Categorie[]> {
