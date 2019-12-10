@@ -11,24 +11,24 @@ pipeline {
         }
 
         stage('Build'){
+	    steps {
 
-           env.NODE_ENV = "test"
+           	echo "Environment will be : ${env.NODE_ENV}"
 
-           print "Environment will be : ${env.NODE_ENV}"
-
-           sh 'node -v'
-	   sh 'npm prune'
-           sh 'npm install'
-           sh 'npm run ng build -- --prod'
-
-         }
+           	sh 'node -v'
+	   	sh 'npm prune'
+           	sh 'npm install'
+           	sh 'npm run ng build -- --prod'
+	    }
+    	}
          
          stage('Cleanup'){
-
-           echo 'prune and cleanup'
-           sh 'npm prune'
-           sh 'rm node_modules -rf'
-         }
+	    steps {
+           	echo 'prune and cleanup'
+           	sh 'npm prune'
+           	sh 'rm node_modules -rf'
+            }
+	 }
 
 
         stage('Build') {
