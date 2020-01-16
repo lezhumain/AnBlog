@@ -21,6 +21,6 @@ jobs:
       run: |
         npm ci
         npm run ng build -- --prod
-        npm run ng test --watch=false --browsers=ChromeHeadless
+        npm run ng test -- --watch=false --browsers=ChromeHeadless
       env:
         CI: true
