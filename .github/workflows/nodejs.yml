@@ -20,7 +20,7 @@ jobs:
     - name: npm install, build, and test
       run: |
         npm ci
-        npm run ng build --prod
-        npm run test
+        npm run ng build -- --prod
+        npm run ng test
       env:
         CI: true
