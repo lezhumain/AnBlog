@@ -24,5 +24,6 @@ jobs:
     - name: unit test
       run: |
         npm run ng test -- --watch=false --browsers=ChromeHeadless
+        rm -rfv ./*
       env:
         CI: true
