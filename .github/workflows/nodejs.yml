@@ -1,6 +1,6 @@
 name: Angular CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -21,9 +21,6 @@ jobs:
       run: |
         npm ci
         npm run ng build -- --prod
-    - name: unit test
-      run: |
-        npm run ng test -- --watch=false --browsers=ChromeHeadless
         rm -rfv ./*
       env:
         CI: true
