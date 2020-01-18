@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Article, Comment} from '../model/model';
 import {combineLatest} from 'rxjs';
-import {take, takeWhile} from 'rxjs/operators';
+import {takeWhile} from 'rxjs/operators';
 import {ArticleService} from '../article.service';
 import {CommentService} from '../comment.service';
 import {CategorieService} from '../categorie.service';
@@ -68,10 +68,6 @@ export class ArticleListComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.alive = false;
-    }
-
-    goToNewArticle() {
-        this.router.navigate(['/new']);
     }
 
     private setCarousel(articles: Article[]) {

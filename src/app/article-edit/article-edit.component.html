@@ -40,6 +40,13 @@
                            [(ngModel)]="newArticle.soustitre">
                 </div>
                 <div class="form-group">
+                    <input [(ngModel)]="newCategorie" class="form-control" name="newCategorie"
+                           placeholder="New category" type="text">
+                    <button (click)="addCategorie()" class="btn btn-primary" id="categoryButton" type="button">Add
+                        category
+                    </button>
+                </div>
+                <div class="form-group">
                     <label for="categorieId">Catetgorie</label>
                     <select class="form-control" id="categorieId" name="categorieId" [(ngModel)]="newArticle.categorieId">
                         <option value="{{ca.id}}" *ngFor="let ca of categ | async">{{ca.name}}</option>
