@@ -1,16 +1,9 @@
 /* tslint:disable:variable-name */
-import {Article, Categorie, Comment} from './model/model';
-import {ChangeDetectorRef, Component, DoCheck, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {ArticleService} from './article.service';
+import {Article, Categorie} from './model/model';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {take, takeWhile} from 'rxjs/operators';
-import {CommentService} from './comment.service';
-import {combineLatest} from 'rxjs';
 import {CategorieService} from './categorie.service';
-import {JsonUtils} from './utils/tsutils';
-import {NavbarService} from './navbar.service';
 import {HeaderData, HeaderService} from './header.service';
-import {ChangeDetection} from '@angular/cli/lib/config/schema';
 
 @Component({
     selector: 'app-root',
@@ -40,14 +33,16 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        // TEST
+
         this.newArticle = new Article();
 
-        this.categorieService.getCategories().pipe(take(1)).subscribe( c => this.categories = c );
+        this.categorieService.getCategories().pipe(take(1)).subscribe(c => this.categories = c);
 
-        this.headerService.headerData.pipe(takeWhile( () => this.alive)).subscribe( (headerData) => {
+        this.headerService.headerData.pipe(takeWhile(() => this.alive)).subscribe((headerData) => {
             this.headerData = headerData;
             this.cdr.detectChanges();
-            console.log("headerData: %o", headerData);
+            console.log('headerData: %o', headerData);
         });
     }
 
