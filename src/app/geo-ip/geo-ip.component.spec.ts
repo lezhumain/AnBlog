@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GeoIpComponent } from './geo-ip.component';
+import {GeoIpComponent} from './geo-ip.component';
 import {GeoIpService} from '../geo-ip.service';
 import {HttpClientModule} from '@angular/common/http';
 import {of} from 'rxjs';
@@ -38,17 +38,19 @@ fdescribe('GeoIpComponent', () => {
             lat: 51.5506,
             lon: -0.1873,
             org: "Vmcbbuk",
-            query: "82.36.197.47",
-            region: "ENG",
-            regionName: "England",
-            status: "success",
-            timezone: "Europe/London",
-            zip: "NW3"
+            query: '82.36.197.47',
+            region: 'ENG',
+            regionName: 'England',
+            status: 'success',
+            timezone: 'Europe/London',
+            zip: 'NW3'
         };
         const expected = JSON.stringify(data, null, 2);
 
         // Make the spy return a synchronous Observable with the test data
-        getQuoteSpy = geoIpService.getGeoLoc.and.returnValue( of(data) );
+        // Make the spy return a synchronous Observable with the test data
+
+        getQuoteSpy = geoIpService.getGeoLoc.and.returnValue(of(data));
         fixture.detectChanges();
 
         const preElement: HTMLPreElement = fixture.nativeElement.querySelector('pre');
