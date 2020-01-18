@@ -48,7 +48,7 @@ fdescribe('GeoIpComponent', () => {
         const expected = JSON.stringify(data, null, 2);
 
         // Make the spy return a synchronous Observable with the test data
-        // Make the spy return a synchronous Observable with the test data
+        // Make the spy return a synchronous Observable with the test databktytg
 
         getQuoteSpy = geoIpService.getGeoLoc.and.returnValue(of(data));
         fixture.detectChanges();
