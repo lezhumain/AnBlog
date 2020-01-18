@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {GeoIp, GeoIpService} from '../geo-ip.service';
+import {Component, OnInit} from '@angular/core';
+import {GeoIpService, IpLookup} from '../geo-ip.service';
 import {take} from 'rxjs/operators';
 
 @Component({
@@ -14,7 +14,7 @@ export class GeoIpComponent implements OnInit {
 
     ngOnInit() {
         const obs = this.geoIpService.getGeoLoc();
-        obs.pipe(take(1)).subscribe( (data: GeoIp) => {
+        obs.pipe(take(1)).subscribe((data: IpLookup) => {
             this.htmlData = JSON.stringify(data, null, 2);
         }, err => {
             this.htmlData = 'error';

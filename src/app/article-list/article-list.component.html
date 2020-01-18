@@ -1,27 +1,42 @@
-<app-geo-ip></app-geo-ip>
-
+<!--<app-geo-ip></app-geo-ip>-->
 <app-carousel [items]="carouselItems"></app-carousel>
 
 <!-- Main Content -->
-<div class="container">
+<div class="container mainContainer">
     <!--<div class="row">-->
         <!--<app-carousel [items]="carouselItems"></app-carousel>-->
     <!--</div>-->
-    <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+    <aside class="leftPanel"></aside>
+    <aside class="rightPanel">
+        <div class="youtubeThing">
+            <iframe frameborder="0" height="360" id="ytplayer"
+                    src="https://www.youtube.com/embed/V_6KlvS992Q?autoplay=1&origin=http://example.com&list=PLGsrSrfLZmIx9SaotKv42sLa6XyAKulYu"
+                    type="text/html"
+                    width="100%"></iframe>
+        </div>
+        <div class="deezerThing">
+            <iframe allow="encrypted-media" allowtransparency="true" frameborder="0" height="380"
+                    src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="100%"></iframe>
+        </div>
+    </aside>
+
+    <div class="row text-center">
+        <div class="col-12">
 
             <ng-container *ngFor="let a of articles">
                 <ng-container *ngIf="a.selected === true">
-                    <app-article-preview [article]="a"></app-article-preview>
-                    <hr>
+                    <!--                    <app-article-preview [article]="a"></app-article-preview>-->
+                    <!--                    <hr>-->
+                    <app-article-preview-card [article]="a"></app-article-preview-card>
                 </ng-container>
             </ng-container>
         </div>
         <!-- Pager -->
-        <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#" *ngIf="articles.length > 20">Older Posts &rarr;</a>
-            <button class="btn btn-success float-right" (click)="goToNewArticle()" *ngIf="isAdmin">New</button>
-        </div>
+        <!--        TODO-->
+        <!--        <div class="clearfix">-->
+        <!--            <a class="btn btn-primary float-right" href="#" *ngIf="articles.length > 20">Older Posts &rarr;</a>-->
+        <!--            <button class="btn btn-success float-right" (click)="goToNewArticle()" *ngIf="isAdmin">New</button>-->
+        <!--        </div>-->
     </div>
 </div>
 
