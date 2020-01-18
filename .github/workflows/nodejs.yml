@@ -1,6 +1,6 @@
 name: Node CI
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   build:
@@ -24,8 +24,5 @@ jobs:
     -   name: unit test
         run: |
             npm run ng test -- --watch=false --browsers=ChromeHeadless
-    -   name: clean
-        run: |
-            rm -rfv ./*
     env:
         CI: true
