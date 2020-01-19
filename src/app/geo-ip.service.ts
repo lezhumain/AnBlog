@@ -42,9 +42,9 @@ export interface IpLookup {
     asn: string;
     currency_code: string;
     currency_name: string;
-    'success': boolean;
-    'premium': boolean;
-    'cached': boolean;
+    success: boolean;
+    premium: boolean;
+    cached?: boolean;
 }
 
 @Injectable({
@@ -72,10 +72,14 @@ export class GeoIpService {
     //     ));
     // }
 
-    getGeoLoc(): Observable<IpLookup> {
-        return this.http.get('https://json.geoiplookup.io/api').pipe(
+    getGeoLoc(ip: string = ''): Observable<IpLookup> {
+        if (ip && !ip.startsWith('/')) {
+            ip = '/' + ip;
+        }
+
+        return this.http.get('https://json.geoiplookup.io/api' + ip).pipe(
             map(res => res as IpLookup),
-            tap(ip => console.log('Got ip info: %o', ip))
+            tap(ipres => console.log('Got ip info: %o', ipres))
         );
     }
 }

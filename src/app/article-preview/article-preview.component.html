@@ -1,10 +1,11 @@
-<div class="row post-preview">
+<div *ngIf="article; else loading" class="row post-preview">
     <div class="col-4">
-        <img class="article-img" src="{{article?.img}}">
+        <img class="article-img" src="{{article.img}}">
     </div>
     <div class="col-8">
         <a routerLink="/post/{{article.id}}">
-            <div class="type-indicator" [style.backgroundColor]="article.categorie?.cssColor">{{article.categorie?.name}}</div>
+            <div [style.backgroundColor]="article.categorie?.cssColor"
+                 class="type-indicator">{{article.categorie?.name}}</div>
             <h2 class="post-title">
                 {{article.titre}}
             </h2>
@@ -17,3 +18,6 @@
             on {{article.createdAt}}</p>
     </div>
 </div>
+<ng-template #loading>
+    <div>LOADING...</div>
+</ng-template>
