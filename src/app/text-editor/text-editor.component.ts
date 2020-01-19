@@ -1,9 +1,8 @@
 // Import Froala Editor.
-import FroalaEditor from 'froala-editor';
-
 // We will make usage of the Init hook and make the implementation there.
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+
 @Component({
     selector: 'app-text-editor',
     templateUrl: './text-editor.component.html',
@@ -32,7 +31,7 @@ export class TextEditorComponent implements OnInit, ControlValueAccessor {
     }
     get text(): string {
         return this._text;
-    };
+    }
 
     ngOnInit() {
     }
