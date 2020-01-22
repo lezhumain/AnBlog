@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Article} from '../model/model';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-article-preview-card',
@@ -12,15 +13,15 @@ export class ArticlePreviewCardComponent implements OnInit {
     private readonly maxLength = 70;
     private readonly maxLengthTitle = 50;
 
-    constructor() {
+    constructor(private router: Router) {
     }
 
     get content(): string {
-        return this.strip(this.article.content, this.maxLength);
+        return this.strip(this.article ? this.article.titre : '', this.maxLength);
     }
 
     get titre(): string {
-        return this.strip(this.article.titre, this.maxLengthTitle);
+        return this.strip(this.article ? this.article.titre : '', this.maxLengthTitle);
     }
 
     ngOnInit() {
@@ -34,5 +35,9 @@ export class ArticlePreviewCardComponent implements OnInit {
         return value.length >= count
             ? value.substr(0, count) + '...'
             : value;
+    }
+
+    openArticle(id: number) {
+        this.router.navigate(['/post/' + id]);
     }
 }
