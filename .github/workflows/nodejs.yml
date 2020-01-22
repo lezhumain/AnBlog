@@ -17,7 +17,7 @@ jobs:
                 uses: actions/setup-node@v1
                 with:
                     node-version: ${{ matrix.node-version }}
-            -   name: npm install and build prod edit fdsfb vdfbd
+            -   name: npm install and build prod edit fdsfb vdfbdvfxbd
                 run: |
                     npm ci
                     npm run ng build -- --prod
