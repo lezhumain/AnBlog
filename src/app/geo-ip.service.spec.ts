@@ -10,7 +10,7 @@ fdescribe('GeoIpService', () => {
     }));
 
     fit('should get data', (done) => {
-        const service: GeoIpService = TestBed.get(GeoIpService);
+        const service: GeoIpService = TestBed.inject(GeoIpService);
         service.getGeoLoc("").pipe(take(1)).subscribe( (res: GeoIp) => {
             expect(res).toBeTruthy();
             const expected = JSON.stringify({
